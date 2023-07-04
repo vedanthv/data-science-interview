@@ -140,4 +140,159 @@ Relationships are the connections and correlations between entities, basically m
 
 A NULL value indicates the absence of data for a certain cell of a table. Instead, zero is a valid numeric value, and an empty string is a legal string of zero length.
 
+28. What is a function in SQL?
+
+A database object representing a set of SQL statements frequently used for a certain task. A function takes in some input parameters, performs calculations or other manipulations on them, and returns the result. Functions help improve code readability and avoid repetition of the same code snippets.
+
+29. What are the types of functions in SQL?
+
+- Aggregate functions – work on multiple, usually grouped records for the provided columns of a table, and return a single value (usually by group).
+- Scalar functions – work on each individual value and return a single value.
+
+30. Give examples of aggregate and scalar functions?
+
+- aggregate : sum,avg,min,max
+- scalar : len,ucase,lcase,initcap,mid/substr,round,now
+
+31. Give examples of character manipulation functions?
+
+- concat, substr,len,replace,lpad,rpad,trim
+
+32. What are some set operations in SQL?
+
+- UNION, UNION ALL, INTERSECT, EXCEPT
+
+33. How to Pattern Match in SQL?
+
+The LIKE operator in combination with the % and _ wildcards. The % wildcard represents any number of characters including zero, while _ – strictly one character.
+
+34. What is the difference between a primary key and a unique key?
+
+While both types of keys ensure unique values in a column of a table, the first one identifies uniquely each record of the table, and the second one prevents duplicates in that column.
+
+35. Can primary keys be based on multiple columns?
+
+Yes its called composite primary key.
+
+36. What is the order of appearance of the common statements in the SELECT query?
+
+```
+SELECT-FROM-JOIN-ON-WHERE-GROUP BY-HAVING-ORDER BY-LIMIT
+```
+
+37. In which order the interpreter executes the common statements in the SELECT query?
+
+```
+FROM-JOIN-ON-WHERE-GROUP BY-HAVING-SELECT-ORDER BY-LIMIT
+```
+
+38. What is a view and why we should use it?
+
+
+A virtual table containing a subset of data retrieved from one or more database tables (or other views). Views take very little space, simplify complex queries, limit access to the data for security reasons, enable data independence, and summarize data from multiple tables.
+
+
+39. Can we create a view after the table is deleted?
+
+
+No. Any views based on that table will become invalid after deleting the base table. If we try to use such a view anyway, we'll receive an error message.
+
+
+40. What are the different types of SQL Relationships?
+
+- One-to-one – each record in one table corresponds to only one record in another table
+- One-to-many – each record in one table corresponds to several records in another table
+- Many-to-many – each record in both tables corresponds to several records in another table
+
+41. What are the possible values of the boolean data field?
+
+In some SQL flavors, such as PostgreSQL, the BOOLEAN data type exists explicitly and takes values TRUE, FALSE, or NULL. In other flavors, such as Microsoft SQL Server, the BIT datatype is used to store Boolean values as integers 1 (true) or 0 (false).
+
+41. What is normalization in SQL, and why use it?
+
+Normalization is a process of database design that includes organizing and restructuring data in a way to reduce data redundancy, dependency, duplication, and inconsistency. This leads to enhanced data integrity, more tables within the database, more efficient data access and security control, and greater query flexibility.
+
+42. What is denormalization in SQL?
+
+Denormalization is the process opposite of normalization: it introduces data redundancy and combines data from multiple tables. Denormalization optimizes the performance of the database infrastructure in situations when read operations are more important than write operations since it helps avoid complex joins and reduces the time of query running.
+
+43. What is the difference between nested and correlated subqueries?
+
+A correlated subquery is an inner query nested in a bigger (outer) query that refers to the values from the outer query for its execution, meaning that a correlated subquery depends on its outer query. Instead, a non-correlated subquery doesn't rely on the data from the outer query and can be run independently of it.
+
+44. What is the difference between delete and truncate statements?
+
+DELETE is a reversible DML (Data Manipulation Language) command used to delete one or more rows from a table based on the conditions specified in the WHERE clause. 
+
+Instead, TRUNCATE is an irreversible DDL (Data Definition Language) command used to delete all rows from a table. DELETE works slower than TRUNCATE. 
+
+Also, we can't use the TRUNCATE statement for a table containing a foreign key.
+
+45. What is the difference between the DROP and TRUNCATE statements?
+
+DROP deletes a table from the database completely, including the table structure and all the associated constraints, relationships with other tables, and access privileges. 
+
+TRUNCATE deletes all rows from a table without affecting the table structure and constraints. 
+
+DROP works slower than TRUNCATE. Both are irreversible DDL (Data Definition Language) commands.
+
+46. What is the difference between the HAVING and WHERE statements?
+
+The first one works on aggregated data after they are grouped, while the second one checks each row individually. 
+
+If both statements are present in a query, they appear in the following order: WHERE – GROUP BY – HAVING. The SQL engine interprets them also in the same order.
+
+47. How to Rename a Column in SQL?
+
+```sql
+ALTER TABLE table_name
+RENAME COLUMN old_column_name TO new_column_name;
+```
+
+48. How to Delete a column from table?
+
+```sql
+ALTER TABLE table_name
+DROP COLUMN column_name;
+```
+
+49. How to select all even records from the table?
+
+```sql
+SELECT * FROM table_name 
+WHERE ID_column % 2 = 0;
+```
+
+50. How to find nth highest value in the table?
+
+```sql
+SELECT * FROM table_name
+ORDER BY column_name DESC
+LIMIT 1
+OFFSET 5;
+```
+
+51. How to find a value in text column that starts with a letter?
+
+```sql
+SELECT * FROM table_name
+WHERE surname LIKE 'A%';
+```
+
+52. How to find the last id in a table?
+
+```sql
+SELECT id
+FROM table_name
+ORDER BY id DESC
+LIMIT 1;
+```
+
+53. How to select random rows from a table?
+
+```sql
+SELECT * FROM table_name
+ORDER BY RAND()
+LIMIT 5;
+```
 
