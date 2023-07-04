@@ -2,7 +2,7 @@
 
 - [x] [Data Camp Top SQL](datacamp.com/blog/top-sql-interview-questions-and-answers-for-beginners-and-intermediate-practitioners)
 
-- [ ] [Data Modelling Questions](https://www.softwaretestinghelp.com/data-modeling-interview-questions-answers/)
+- [x] [Data Modelling Questions](https://www.softwaretestinghelp.com/data-modeling-interview-questions-answers/)
 
 - [ ] [Top 10 Freq Asked Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
 
