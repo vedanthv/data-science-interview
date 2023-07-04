@@ -4,9 +4,9 @@
 
 - [x] [Data Modelling Questions](https://www.softwaretestinghelp.com/data-modeling-interview-questions-answers/)
 
-- [ ] [Top 10 Freq Asked Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
+- [x] [Top 10 Freq Asked Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
 
-- [ ] [45 Essential SQL Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
+- [ ] [45 Essential SQL Questions](https://www.toptal.com/sql/interview-questions)
 
 - [ ] [Interesting SQL Theory](http://www.indiabix.com/technical/sql-server-common-questions/)
 
