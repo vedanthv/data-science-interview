@@ -1,1 +1,17 @@
-- [ ] [Data Lemur](https://datalemur.com/questions?category=SQL)
+- [ ] [Data Lemur SQL Questions](https://datalemur.com/questions?category=SQL)
+
+- [x] [Data Camp Top SQL](datacamp.com/blog/top-sql-interview-questions-and-answers-for-beginners-and-intermediate-practitioners)
+
+- [ ] [Data Modelling Questions](https://www.softwaretestinghelp.com/data-modeling-interview-questions-answers/)
+
+- [ ] [Top 10 Freq Asked Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
+
+- [ ] [45 Essential SQL Questions](http://java67.blogspot.com.by/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html)
+
+- [ ] [Interesting SQL Theory](http://www.indiabix.com/technical/sql-server-common-questions/)
+
+- [ ] [Schema Based SQL Exercises](https://github.com/XD-DENG/SQL-exercise)
+
+- [ ] [Short and Crisp SQL Questions](http://www.tutorialspoint.com/sql/sql_interview_questions.htm)
+
+
