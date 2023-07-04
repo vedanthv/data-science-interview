@@ -92,3 +92,52 @@ A CTE is a data set that is created temporarily and can be used within a query. 
 
 The benefits of using a CTE are that it is more readable and can be reused throughout the query session, whereas a subquery can only be used within the query in which it is defined.
 
+18. **What is an index?**
+
+A special data structure related to a database table and used for storing its important parts and enabling faster data search and retrieval. Indexes are especially efficient for large databases, where they significantly enhance query performance.
+
+19. **What are the types of indices?**
+
+- Unique index – doesn't allow duplicates in a table column and hence helps maintain data integrity.
+
+- Clustered index – defines the physical order of records of a database table and performs data searching based on the key values. A table can have only one clustered index.
+
+- Non-clustered index – keeps the order of the table records that doesn't match the physical order of the actual data on the disk. It means that the data is stored in one place and a non-clustered index – in another one. A table can have multiple non-clustered indexes.
+
+20. **What is an SQL Schema?**
+
+A collection of database structural elements such as tables, stored procedures, indexes, functions, and triggers. It shows the overall database architecture, specifies the relationships between various objects of a database, and defines different access permissions for them.
+
+21. **What is a schema?**
+
+A collection of database structural elements such as tables, stored procedures, indexes, functions, and triggers. It shows the overall database architecture, specifies the relationships between various objects of a database, and defines different access permissions for them.
+
+22. **What is SQL Operator?**
+
+A reserved character, a combination of characters, or a keyword used in SQL queries to perform a specific operation. SQL operators are commonly used with the WHERE clause to set a condition (or conditions) for filtering the data.
+
+23. **What is SQL Clause?**
+
+A condition imposed on a SQL query to filter the data to obtain the desired result. Some examples are WHERE, LIMIT, HAVING, LIKE, AND, OR, ORDER BY, etc.
+
+24. **How to Select Common Records from two tables?**
+
+```sql
+SELECT * FROM table_1
+INTERSECT
+SELECT * FROM table_1;
+```
+
+25. What are entities?
+
+An entity is a real-world object, creature, place, or phenomenon for which the data can be gathered and stored in a database table. Each entity corresponds to a row in a table, while the table's columns describe its properties. Some examples of entities are bank transactions, students in a school, cars sold, etc.
+
+26. What are relationships? Give some examples?
+
+Relationships are the connections and correlations between entities, basically meaning how two or more tables of a database are related to one another. For example, we can find an ID of the same client in a table on sales data and in a customer table.
+
+27. What is NULL Value?
+
+A NULL value indicates the absence of data for a certain cell of a table. Instead, zero is a valid numeric value, and an empty string is a legal string of zero length.
+
+
