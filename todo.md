@@ -14,4 +14,8 @@
 
 - [ ] [Short and Crisp SQL Questions](http://www.tutorialspoint.com/sql/sql_interview_questions.htm)
 
+- [ ] [Last Minute DBMS Tutorial](https://www.geeksforgeeks.org/dbms/?ref=lbp)
 
+- [ ] [Last Minute SQL Tutorial](https://www.geeksforgeeks.org/sql-tutorial/?ref=lbp)
+
+- [ ] [Huge List of ML Questions](https://github.com/alexeygrigorev/data-science-interviews/tree/master)
