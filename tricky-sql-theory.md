@@ -8,6 +8,7 @@ It is important to note that the performance of UNION ALL will typically be bett
 
 2. What is the result of the query?
 
+```
 sql> SELECT * FROM runners;
 +----+--------------+
 | id | name         |
@@ -28,6 +29,7 @@ sql> SELECT * FROM races;
 |  3 | cross-country  |  2        |
 |  4 | triathalon     |  NULL     |
 +----+----------------+-----------+
+```
 
 ```sql
 SELECT * FROM runners WHERE id NOT IN (SELECT winner_id FROM races)
@@ -97,6 +99,7 @@ having count(*) >= 1
 
 7. Given the below tables write a query to to get the list of users who took the a training lesson more than once in the same day, grouped by user and training lesson, each ordered from the most recent lesson date to oldest date.
 
+```
 SELECT * FROM users;
 
 user_id  username
@@ -104,9 +107,10 @@ user_id  username
 2        Jane Don                                                                                            
 3        Alice Jones                                                                                         
 4        Lisa Romero
+```
 
 SELECT * FROM training_details;
-
+```
 user_training_id  user_id  training_id  training_date
 1                 1        1            "2015-08-02"
 2                 2        1            "2015-08-03"
@@ -122,7 +126,7 @@ user_training_id  user_id  training_id  training_date
 12                3        2            "2015-08-02"
 13                1        1            "2015-08-02"
 14                4        3            "2015-08-03"
-
+```
 ```sql
 SELECT
       u.user_id,
@@ -218,6 +222,7 @@ But when stored in a database, char always uses the maximum length and is blank-
 
 18. Given this table
 
+```
 Testdb=# Select * FROM "Test"."EMP";
 
  ID
@@ -228,7 +233,7 @@ Testdb=# Select * FROM "Test"."EMP";
   4
   5
 (5 rows)
-
+```
 19. What will be the output of the below snippet?
 
 ```sql
@@ -240,10 +245,12 @@ Select SUM(3) FROM "Test"."EMP";
 
 20. Table is as follows:
 
+```
 ID	C1	C2	C3
 1	Red	Yellow	Blue
 2	NULL	Red	Green
 3	Yellow	NULL	Violet
+```
 Print the rows which have ‘Yellow’ in one of the columns C1, C2, or C3, but without using OR.
 
 ```sql
@@ -253,6 +260,7 @@ WHERE 'Yellow' IN (C1, C2, C3)
 
 21. Write a query to insert/update Col2’s values to look exactly opposite to Col1’s values.
 
+```
 Col1	Col2
 1	0
 0	1
@@ -262,8 +270,197 @@ Col1	Col2
 0	1
 1	0
 1	0
+```
 
 ```sql
 update table set col2 = case when col1 = 1 then 0 else 1 end
 ```
 
+22. How do you get the last id without the max function?
+
+```sql
+select id from table order by id desc limit 1
+```
+
+23. What is the difference between IN and EXISTS?
+
+IN:
+
+Works on List result set
+Doesn’t work on subqueries resulting in Virtual tables with multiple columns
+Compares every value in the result list
+Performance is comparatively SLOW for larger resultset of subquery
+
+EXISTS:
+
+Works on Virtual tables
+Is used with co-related queries
+Exits comparison when match is found
+Performance is comparatively FAST for larger resultset of subquery
+
+24. Statement to return 5th Highest Salary from a table?
+
+```sql
+DECLARE @nthHighest INT = 2
+SELECT MAX(Salary) as 'Salary' from #SalaryDetail
+where Salary NOT IN
+(
+     SELECT TOP(@nthHighest-1) (SALARY) from #SalaryDetail ORDER BY Salary Desc
+)
+```
+
+25. Given the following table named A:
+
+```
+  x
+------
+  2
+ -2
+  4
+ -4
+ -3    
+  0
+  2
+```
+
+Write a single query to calculate the sum of all positive values of x and he sum of all negative values of x.
+
+```sql
+select sum(case when x>0 then x else 0 end)sum_pos,sum(case when x < 0 then x else 0 end)sum_neg from a
+```
+
+26. Given the table mass_table:
+
+```
+weight
+5.67
+34.567
+365.253
+34
+Write a query that produces the output:
+
+weight	kg	gms
+5.67	5	67
+34.567	34	567
+365.253	365	253
+34	34	0
+
+```
+
+```sql
+select weight,TRUNC(weight) as kg,nvl(substr(weight-trunc(weight),2),0) as gms from mass_table;
+```
+
+27. Consider the Employee table below.
+
+```
+Emp_Id	Emp_name	Salary	Manager_Id
+10	Anil	50000	18
+11	Vikas	75000	16
+12	Nisha	40000	18
+13	Nidhi	60000	17
+14	Priya	80000	18
+15	Mohit	45000	18
+16	Rajesh	90000	–
+17	Raman	55000	16
+18	Santosh	65000	17
+Write a query to generate below output:
+
+Manager_Id	Manager	Average_Salary_Under_Manager
+16	Rajesh	65000
+17	Raman	62500
+18	Santosh	53750
+```
+
+```sql
+SELECT b.emp_id as "mgr_id",
+b.emp_name as "manager_name",
+avg(a.salary) as "Avg_Sal_Under_Mgr"
+from Employee a, Employee b
+where a.manager_id = b.emp_id
+group by b.emp_id, b.emp_name
+order by b.emp_id;
+```
+
+28. How do you copy data from one table to another table ?
+
+```sql
+INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
+```
+
+29. Given these contents of the Customers table:
+
+```
+Id	Name			ReferredBy
+1	John Doe		NULL
+2	Jane Smith		NULL
+3	Anne Jenkins		2
+4	Eric Branford		NULL
+5	Pat Richards		1
+6	Alice Barnes		2
+```
+
+Write a query to return the list of customers not referred by Jane Smith
+
+```sql
+SELECT Name FROM Customers WHERE ReferredBy IS NULL OR ReferredBy <> 2
+```
+
+30. Given a table TBL with a field Nmbr that has rows with the following values:
+
+```
+1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1
+```
+
+Write a query to add 2 where Nmbr is 0 and add 3 where Nmbr is 1.
+
+```sql
+update TBL set Nmbr = case when Nmbr = 0 then Nmbr+2 else Nmbr+3 end;
+```
+
+31. How do you get the Nth-highest salary from the Employee table without a subquery or CTE?
+
+```sql
+SELECT salary from employee order by salary desc limit 2,1
+```
+
+For Nth Highest Salary
+
+```sql
+SELECT salary from employee order by salary desc limit (N-1),1
+```
+
+32. How to Find Duplicate Records with One Field?
+
+```sql
+ SELECT name, COUNT(email) 
+ FROM users
+ GROUP BY email
+ HAVING COUNT(email) > 1 
+```
+
+33. How to Find Duplicate Records with more than one field?
+
+```sql
+ SELECT name, email, COUNT(*)
+ FROM users
+ GROUP BY name, email
+ HAVING COUNT(*) > 1
+```
+
+34. Considering the database schema displayed in the SQLServer-style diagram below, write a SQL query to return a list of all the invoices. 
+
+**For each invoice**, show the Invoice ID, the billing date, the customer’s name, and the name of the customer who referred that customer (if any). The list should be ordered by billing date.
+
+<img src = "https://assets.toptal.io/images?url=https%3A%2F%2Fuploads.toptal.io%2Fblog%2Fimage%2F669%2Ftoptal-blog-image-1416228086286.png">
+
+```sql
+SELECT i.Id, i.BillingDate, c.Name, r.Name AS ReferredByName
+FROM Invoices i
+ LEFT JOIN Customers c ON i.CustomerId = c.Id
+ LEFT JOIN Customers r ON c.ReferredBy = r.Id
+ORDER BY i.BillingDate;
+```
