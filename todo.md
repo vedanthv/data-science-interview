@@ -24,7 +24,7 @@
 
 ### Python and Libraries
 
-- [ ] [Numpy Arrays](https://www.w3resource.com/python-exercises/numpy/index-array.php)
+- [x] [Numpy Arrays](https://www.w3resource.com/python-exercises/numpy/index-array.php)
 
 ### Machine Learning
 
