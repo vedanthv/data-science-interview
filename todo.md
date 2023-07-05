@@ -19,3 +19,5 @@
 - [ ] [Last Minute SQL Tutorial](https://www.geeksforgeeks.org/sql-tutorial/?ref=lbp)
 
 - [ ] [Huge List of ML Questions](https://github.com/alexeygrigorev/data-science-interviews/tree/master)
+
+- [ ] [Tons of SQL Practice](https://github.com/ptyadana/SQL-Data-Analysis-and-Visualization-Projects/tree/master)

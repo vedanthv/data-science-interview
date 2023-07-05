@@ -204,3 +204,146 @@ product_id
 ORDER BY mth, product_id;
 ```
 
+#### 11. App Click Through Rate
+
+Assume you have an events table on Facebook app analytics. Write a query to calculate the click-through rate (CTR) for the app in 2022 and round the results to 2 decimal places.
+
+Definition and note:
+
+Percentage of click-through rate (CTR) = 100.0 * Number of clicks / Number of impressions
+
+```sql
+SELECT app_id,
+ROUND(
+100*SUM(CASE WHEN event_type = 'click' THEN 1 ELSE 0 END)/
+SUM(CASE WHEN event_type = 'impression' THEN 1 ELSE 0 END),2) AS ctr_rate
+
+FROM events
+WHERE timestamp >= '2022-01-01' 
+  AND timestamp < '2023-01-01'
+GROUP BY app_id;
+
+```
+
+#### 12. Second Day Confirmation
+
+Assume you're given tables with information about TikTok user sign-ups and confirmations through email and text. New users on TikTok sign up using their email addresses, and upon sign-up, each user receives a text message confirmation to activate their account.
+
+```sql
+SELECT DISTINCT user_id
+FROM emails
+INNER JOIN texts
+ON emails.email_id = texts.email_id
+WHERE texts.action_date = emails.signup_date + INTERVAL '1 day'
+AND texts.signup_action = "Confirmed";
+```
+
+#### 13. Card Issued Difference
+
+Your team at JPMorgan Chase is soon launching a new credit card, and to gain some context, you are analyzing how many credit cards were issued each month.
+
+Write a query that outputs the name of each credit card and the difference in issued amount between the month with the most cards issued, and the least cards issued. Order the results according to the biggest difference.
+
+```sql
+SELECT 
+  card_name, 
+  MAX(issued_amount) - MIN(issued_amount) AS difference
+FROM monthly_cards_issued
+GROUP BY card_name
+ORDER BY difference DESC;
+```
+
+#### 14. Compressed Mean
+
+You're trying to find the mean number of items per order on Alibaba, rounded to 1 decimal place using tables which includes information on the count of items in each order (item_count table) and the corresponding number of orders for each item count (order_occurrences table).
+
+```sql
+SELECT 
+  ROUND(
+  SUM(item_count::DECIMAL*order_occurrences)
+    /SUM(order_occurrences),1) AS mean
+FROM items_per_order;
+```
+
+#### 15. Pharmacy Analytics Part 1
+
+CVS Health is trying to better understand its pharmacy sales, and how well different products are selling. Each drug can only be produced by one manufacturer.
+
+Write a query to find the top 3 most profitable drugs sold, and how much profit they made. Assume that there are no ties in the profits. Display the result from the highest to the lowest total profit.
+
+```sql
+SELECT
+  drug,
+  total_sales - cogs AS total_profit
+FROM pharmacy_sales
+ORDER BY total_profit DESC
+LIMIT 3;
+```
+
+#### 16. Pharmacy Analytics Part II
+
+CVS Health is analyzing its pharmacy sales data, and how well different products are selling in the market. Each drug is exclusively manufactured by a single manufacturer.
+
+Write a query to identify the manufacturers associated with the drugs that resulted in losses for CVS Health and calculate the total amount of losses incurred.
+
+Output the manufacturer's name, the number of drugs associated with losses, and the total losses in absolute value. Display the results sorted in descending order with the highest losses displayed at the top.
+
+```sql
+SELECT
+  manufacturer,
+  COUNT(drug) AS drug_count, 
+  SUM(cogs - total_sales) AS total_loss
+FROM pharmacy_sales
+WHERE cogs > total_sales
+GROUP BY manufacturer
+ORDER BY total_loss DESC;
+```
+
+#### 17. Pharmacy Analytics III
+
+CVS Health is trying to better understand its pharmacy sales, and how well different products are selling.
+
+Write a query to find the total drug sales for each manufacturer. Round your answer to the closest million, and report your results in descending order of total sales.
+
+```sql
+SELECT manufacturer,
+CONCAT('$',ROUND(SUM(total_sales)/1000000,'million')) AS sales_mil
+FROM pharmacy_sales
+GROUP BY manufacturer
+ORDER BY SUM(total_sales) DESC
+```
+
+#### 18. Patient Support Analytics Part I
+
+UnitedHealth has a program called Advocate4Me, which allows members to call an advocate and receive support for their health care needs – whether that's behavioural, clinical, well-being, health care financing, benefits, claims or pharmacy help.
+
+Write a query to find how many UHG members made 3 or more calls. case_id column uniquely identifies each call made.
+
+```sql
+SELECT COUNT(policy_holder_id) AS member_count
+FROM (
+      SELECT 
+          policy_holder_id,
+          COUNT(case_id)  AS call_count
+      FROM callers
+      GROUP BY policy_holder_id
+      HAVING COUNT(case_id) >= 3
+      ) AS call_records;
+```
+
+#### 19. Patient Support Analytics III
+
+UnitedHealth Group has a program called Advocate4Me, which allows members to call an advocate and receive support for their health care needs – whether that's behavioural, clinical, well-being, health care financing, benefits, claims or pharmacy help.
+
+Calls to the Advocate4Me call centre are categorised, but sometimes they can't fit neatly into a category. These uncategorised calls are labelled “n/a”, or are just empty (when a support agent enters nothing into the category field).
+
+Write a query to find the percentage of calls that cannot be categorised. Round your answer to 1 decimal place.
+
+```sql
+SELECT
+  ROUND(100.0 * COUNT(case_id) FILTER (
+    WHERE call_category IS NULL OR call_category = 'n/a')
+    / COUNT(case_id),1) AS uncategorised_call_pct
+FROM callers;
+```
+
