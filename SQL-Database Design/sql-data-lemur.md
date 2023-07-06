@@ -1,5 +1,10 @@
 ### Data Lemur SQL Questions
 
+Some preview material : 
+
+1. [SQL Window Functions](https://mode.com/sql-tutorial/sql-window-functions/)
+2. [Most Popular SQL Window Functions](https://mode.com/blog/most-popular-window-functions-and-how-to-use-them/)
+
 #### 1. Pages with No Likes
 
 Assume you're given two tables containing data about Facebook Pages and their respective likes (as in "Like a Facebook Page").
