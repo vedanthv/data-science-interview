@@ -347,3 +347,95 @@ SELECT
 FROM callers;
 ```
 
+#### 20. User's Third Transaction
+
+Assume you are given the table below on Uber transactions made by users. Write a query to obtain the third transaction of every user. Output the user id, spend and transaction date.
+
+```sql
+SELECT user_id,spend,transaction_date
+FROM (
+  SELECT user_id, spend, transaction_date ROW_NUMBER() OVER (
+      PARTITION BY user_id ORDER BY transaction_date
+  ) AS row_number FROM transactions
+) AS trans_no
+WHERE row_number = 3;
+```
+
+[Row Number](https://www.sqlservertutorial.net/sql-server-window-functions/sql-server-row_number-function/)
+
+#### 21. Sending vs Opening Snaps
+
+Assume you're given tables with information on Snapchat users, including their ages and time spent sending and opening snaps.
+
+Write a query to obtain a breakdown of the time spent sending vs. opening snaps as a percentage of total time spent on these activities grouped by age group. Round the percentage to 2 decimal places in the output.
+
+Notes:
+
+Calculate the following percentages:
+time spent sending / (Time spent sending + Time spent opening)
+Time spent opening / (Time spent sending + Time spent opening)
+To avoid integer division in percentages, multiply by 100.0 and not 100.
+
+```sql
+SELECT age.age_bucket,
+    SUM(activities.time_spent) FILTER (WHERE activity_type = "send")/SUM(activities.time_spent)
+    AS send_perc,
+    SUM(activities.time_spend) FILTER(WHERE activity_type = "open")/SUM(activities.time_spent)
+    AS open_perc
+FROM activities 
+INNER JOIN age_breakdown AS age ON activities.user_id = age.user_id 
+WHERE activities.activity_type IN ('send', 'open') 
+GROUP BY age.age_bucket;
+```
+
+#### 22. Tweet Rollling Averages
+
+Given a table of tweet data over a specified time period, calculate the 3-day rolling average of tweets for each user. Output the user ID, tweet date, and rolling averages rounded to 2 decimal places.
+
+```sql
+SELECT    
+  user_id,    
+  tweet_date,   
+  ROUND(AVG(tweet_count) OVER (
+    PARTITION BY user_id     
+    ORDER BY tweet_date     
+    ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) -- take two rows before current row and the current row
+  ,2) AS rolling_avg_3d
+FROM tweets;
+```
+
+#### 23. International Call Percentage
+
+Step 1: Join the tables to obtain the caller's and receiver's country information
+
+To determine whether a call is international or not, we need country_id for both caller and receiver. This can be achieved by joining phone_info twice, first for the caller, and second for the receiver.
+
+```sql
+SELECT  
+  caller.country_id AS caller_country,
+  receiver.country_id AS receiver_country
+FROM phone_calls AS calls
+LEFT JOIN phone_info AS caller
+  ON calls.caller_id = caller.caller_id
+LEFT JOIN phone_info AS receiver
+  ON calls.receiver_id = receiver.caller_id;
+```
+
+Step 2 : After obtaining the necessary info, we can start with the calculation. To do so, we need 2 metrics:
+
+number of total calls
+number of international calls
+Getting the number of total calls is easy with COUNT(*).
+
+```sql
+SELECT 
+  ROUND(
+    100.0 * SUM(CASE WHEN caller.country_id <> receiver.country_id THEN 1 ELSE NULL END)
+    /COUNT(*),1) AS international_call_pct
+FROM phone_calls AS calls
+LEFT JOIN phone_info AS caller
+ON calls.caller_id = caller.caller_id
+LEFT JOIN phone_info AS receiver
+ON calls.receiver_id = receiver.caller_id;
+```
+
