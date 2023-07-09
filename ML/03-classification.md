@@ -45,13 +45,13 @@ Accuracy is a metric for evaluating classification models. It is calculated by d
 
 <br/>
 
-**Is accuracy always a good metric? **
+**Is accuracy always a good metric?**
 
 Accuracy is not a good performance metric when there is imbalance in the dataset. For example, in binary classification with 95% of A class and 5% of B class, a constant prediction of A class would have an accuracy of 95%. In case of imbalance dataset, we need to choose Precision, recall, or F1 Score depending on the problem we are trying to solve.
 
 <br/>
 
-**What is the confusion table? What are the cells in this table? **
+**What is the confusion table? What are the cells in this table?**
 
 Confusion table (or confusion matrix) shows how many True positives (TP), True Negative (TN), False Positive (FP) and False Negative (FN) model has made.
 
@@ -82,7 +82,7 @@ Most of the performance metrics for classification models are based on the value
 
 <br/>
 
-**Precision-recall trade-off **
+**Precision-recall trade-off**
 
 Tradeoff means increasing one parameter would lead to decreasing of other. Precision-recall tradeoff occur due to increasing one of the parameter(precision or recall) while keeping the model same. 
 
@@ -113,3 +113,62 @@ If we assume ROC curve consists of dots, <img src="https://render.githubusercont
 <img src="https://render.githubusercontent.com/render/math?math=AUC = \frac{1}{2} \sum_{i=1}^{m-1}(x_{i%2B1}-x_i)\cdot (y_i%2By_{i%2B1})">
 
 An excellent model has AUC near to the 1 which means it has good measure of separability. A poor model has AUC near to the 0 which means it has worst measure of separability. When AUC score is 0.5, it means model has no class separation capacity whatsoever. 
+
+<br/>
+
+**What is the PR (precision-recall) curve? ‍⭐️**
+
+A *precision*-*recall curve* (or PR Curve) is a plot of the precision (y-axis) and the recall (x-axis) for different probability thresholds. Precision-recall curves (PR curves) are recommended for highly skewed domains where ROC curves may provide an excessively optimistic view of the performance.
+
+<br/>
+
+**What is the area under the PR curve? Is it a useful metric? ‍⭐️**
+
+The Precision-Recall AUC is just like the ROC AUC, in that it summarizes the curve with a range of threshold values as a single score.
+
+A high area under the curve represents both high recall and high precision, where high precision relates to a low false positive rate, and high recall relates to a low false negative rate.
+
+<br/>
+
+**In which cases AU PR is better than AU ROC? ‍⭐️**
+
+What is different however is that AU ROC looks at a true positive rate TPR and false positive rate FPR while AU PR looks at positive predictive value PPV and true positive rate TPR.
+
+Typically, if true negatives are not meaningful to the problem or you care more about the positive class, AU PR is typically going to be more useful; otherwise, If you care equally about the positive and negative class or your dataset is quite balanced, then going with AU ROC is a good idea.
+
+<br/>
+
+**What do we do with categorical variables? ‍⭐️**
+
+Categorical variables must be encoded before they can be used as features to train a machine learning model. There are various encoding techniques, including:
+- One-hot encoding
+- Label encoding
+- Ordinal encoding
+- Target encoding
+
+<br/>
+
+**Why do we need one-hot encoding? ‍⭐️**
+
+If we simply encode categorical variables with a Label encoder, they become ordinal which can lead to undesirable consequences. In this case, linear models will treat category with id 4 as twice better than a category with id 2. 
+
+One-hot encoding allows us to represent a categorical variable in a numerical vector space which ensures that vectors of each category have equal distances between each other. 
+
+This approach is not suited for all situations, because by using it with categorical variables of high cardinality (e.g. customer id) we will encounter problems that come into play because of the curse of dimensionality.
+
+<br/>
+
+**What is "curse of dimensionality"? ‍⭐️**
+
+The curse of dimensionality is an issue that arises when working with high-dimensional data. It is often said that "the curse of dimensionality" is one of the main problems with machine learning. The curse of dimensionality refers to the fact that, as the number of dimensions (features) in a data set increases, the number of data points required to accurately learn the relationships between those features increases exponentially.
+
+A simple example where we have a data set with two features, x1 and x2. If we want to learn the relationship between these two features, we need to have enough data points so that we can accurately estimate the parameters of that relationship. 
+
+However, if we add a third feature, x3, then the number of data points required to accurately learn the relationships between all three features increases exponentially. 
+
+This is because there are now more parameters to estimate, and the number of data points needed to accurately estimate those parameters increases exponentially with the number of parameters.
+
+Simply put, the curse of dimensionality basically means that the error increases with the increase in the number of features.
+
+<br/>
+
