@@ -1,6 +1,6 @@
 ### SQL and Database Design
 
-- [ ] [Data Lemur SQL Questions](https://datalemur.com/questions?category=SQL)
+- [x] [Data Lemur SQL Questions](https://datalemur.com/questions?category=SQL)
 
 - [x] [Data Camp Top SQL](datacamp.com/blog/top-sql-interview-questions-and-answers-for-beginners-and-intermediate-practitioners)
 
